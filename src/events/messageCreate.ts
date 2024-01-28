@@ -1,4 +1,3 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from 'discord.js';
 import { Event, ICommand } from '../structures';
 
 export default new Event({

@@ -26,12 +26,12 @@ export default new Command({
 
         const row = new ActionRowBuilder<ButtonBuilder>().addComponents([button]);
 
-        await message.reply({
+        const msg = await message.reply({
             embeds: [embed],
             components: [row]
         });
 
-        const collector = message.createMessageComponentCollector({
+        const collector = msg.createMessageComponentCollector({
             filter: (interaction) => interaction.user.id !== message.author.id ? (interaction.deferUpdate() ? false : false) : true,
             time: 60000 * 5,
         });
@@ -39,7 +39,7 @@ export default new Command({
         collector.on('collect', async (_i) => {
             throw collector.stop('time');
         }).once('end', async (_c, r) => {
-            if (r !== 'limit' && r !== 'force_stop') throw message.deleteReply(true);
+            if (r !== 'limit' && r !== 'force_stop') throw (await message.delete()) && msg.delete();
         });
     }
 });

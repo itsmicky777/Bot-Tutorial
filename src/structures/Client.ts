@@ -102,7 +102,7 @@ export class Client extends BaseClient {
     }
 }
 
-export class EmbedBuilder extends Embed {
+export class EmbedBuilder extends BaseEmbed {
     constructor(message?: Message, thumbnail = false) {
         super({});
         

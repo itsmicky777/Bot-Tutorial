@@ -1,5 +1,6 @@
 import { Awaitable, ClientEvents, Message } from 'discord.js';
 import { Client } from './Client';
+import { glob } from 'glob';
 
 export interface Execute {
     message: Message;
@@ -24,14 +25,13 @@ export class Command {
     }
 }
 
-export interface IEvent<Key extends keyof ClientEvents> {
+export class Event<Key extends keyof ClientEvents = keyof ClientEvents> {
     name: Key;
     execute: (client: Client, ...args: ClientEvents[Key]) => Awaitable<any>;
-}
 
-export class Event<Key> {
-    constructor(event: IEvent<Key>) {
-        Object.assign(this, event);
+    constructor({ name, execute }: { name: Key, execute: (client: Client, ...args: ClientEvents[Key]) => Awaitable<any>}) {
+        this.name = name;
+        this.execute = execute;
     }
 }
 
@@ -54,7 +54,7 @@ export async function loadEvents(client: Client) {
     const files = await glob('dist/events/*.js');
         
     for(const file of files) {
-        const event = ((await import(process.cwd() + '/' + file))?.default) as IEvent<event['name']>;
+        const event = ((await import(process.cwd() + '/' + file))?.default) as IEvent;
         client.on(event.name, event.execute.bind(null, client));
     }
 }
