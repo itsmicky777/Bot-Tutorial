@@ -54,7 +54,7 @@ export async function loadEvents(client: Client) {
     const files = await glob('dist/events/*.js');
         
     for(const file of files) {
-        const event = ((await import(process.cwd() + '/' + file))?.default) as IEvent;
+        const event = ((await import(process.cwd() + '/' + file))?.default) as Event;
         client.on(event.name, event.execute.bind(null, client));
     }
 }

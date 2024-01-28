@@ -6,7 +6,7 @@ import 'dotenv/config';
 export class Client extends BaseClient {
     commands: Collection<string, ICommand>;
     aliases: Collection<string, string>;
-    database: QuickDB;
+    db: QuickDB;
     
     constructor() {
         super({
@@ -107,8 +107,7 @@ export class EmbedBuilder extends BaseEmbed {
         super({});
         
         this.setColor('#7241BC');
-        const date = new Date(Date.now()).format;
         if (thumbnail) this.setThumbnail(message.author.displayAvatarURL());
-        if (message) this.setFooter({ text: `› ${message.author.displayName} - ${date}`, iconURL: message.author.displayAvatarURL() });
+        if (message) this.setFooter({ text: `› ${message.author.displayName}`, iconURL: message.author.displayAvatarURL() });
     }
 }
