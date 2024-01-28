@@ -1,0 +1,26 @@
+{
+    "name": "darwin",
+    "version": "0.0.1",
+    "author": "itsmicky777 <itsmicky777@gmail.com>",
+    "main": "dist/Bot.js",
+    "license": "MIT",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "6.16.0",
+        "@typescript-eslint/parser": "6.16.0",
+        "@typescript-eslint/typescript-estree": "6.16.0",
+        "eslint": "8.56.0",
+        "typescript": "5.3.3"
+    },
+    "dependencies": {
+        "discord.js": "14.14.1",
+        "dotenv": "16.3.1",
+        "glob": "10.3.10",
+        "quick.db": "9.1.7",
+        "write-file-atomic": "5.0.1"
+    },
+    "scripts": {
+        "lint": "eslint . --fix",
+        "build": "tsc --project tsconfig.json",
+        "start": "node --no-warnings dist/Darwin.js"
+    }
+}
