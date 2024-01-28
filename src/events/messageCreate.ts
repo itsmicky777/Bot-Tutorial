@@ -24,7 +24,7 @@ export default new Event({
             }
             
             if(!command) {
-                const match = findBestMatch(cmd, [...Array.from(client.commands.keys(), ...Array.from(client.aliases.keys()))]);
+                const match = findBestMatch(cmd, (Array.from(client.commands.keys()).concat(Array.from(client.aliases.keys())) as string[]));
 
                 if(match.rating > 0.75) {
                     command = client.commands.get(match.target);
